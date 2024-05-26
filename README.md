@@ -1,1 +1,1 @@
-# PawsAndHearts-awsSAM
+# PawsAndHearts-AWSSAM-GraphQL-API
