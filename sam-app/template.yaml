@@ -1,0 +1,105 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  python-graphql-aws
+
+  Sample SAM Template for python-graphql-aws
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  PetApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Auth:
+        ApiKeyRequired: true
+
+  PetApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: pet_python_api/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        HealthApi:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: get
+            RestApiId: !Ref PetApi
+        GetPetApi:
+          Type: Api
+          Properties:
+            Path: /pet
+            Method: get
+            RestApiId: !Ref PetApi
+        GetPetsApi:
+          Type: Api
+          Properties:
+            Path: /pets
+            Method: get
+            RestApiId: !Ref PetApi
+        UpdateAvailabilityApi:
+          Type: Api
+          Properties:
+            Path: /updateAvailability
+            Method: patch
+            RestApiId: !Ref PetApi
+        DeletePetApi:
+          Type: Api
+          Properties:
+            Path: /pet
+            Method: delete
+            RestApiId: !Ref PetApi
+        SavePetApi:
+          Type: Api
+          Properties:
+            Path: /pet
+            Method: post
+            RestApiId: !Ref PetApi
+
+  UsagePlan:
+    Type: AWS::ApiGateway::UsagePlan
+    Properties: 
+      ApiStages:
+        - ApiId: !Ref PetApi
+          Stage: !Ref PetApi.Stage
+      UsagePlanName: PetApiUsagePlan
+      Description: "Usage plan for Pet API"
+      Throttle:
+        BurstLimit: 100
+        RateLimit: 50
+
+  UsagePlanKey:
+    Type: AWS::ApiGateway::UsagePlanKey
+    Properties:
+      KeyId: !Ref ApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref UsagePlan
+
+  ApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Enabled: true
+      GenerateDistinctId: true
+      Name: PetApiKey
+
+Outputs:
+  PetApiEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage for Pet API function"
+    Value: !Sub "https://${PetApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  PetApiFunctionArn:
+    Description: "Pet API Lambda Function ARN"
+    Value: !GetAtt PetApiFunction.Arn
+  PetApiFunctionIamRole:
+    Description: "Implicit IAM Role created for Pet API function"
+    Value: !GetAtt PetApiFunctionRole.Arn
+  PetApiKey:
+    Description: "API Key for Pet API"
+    Value: !Ref ApiKey
