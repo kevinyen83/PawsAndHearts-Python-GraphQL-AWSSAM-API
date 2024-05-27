@@ -36,7 +36,7 @@ All requests must include a valid API key in the request headers:
 
 **Request**
 
-- **URL**: `https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/graphql`
+- **URL**: `https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/pet`
 - **Method**: `POST`
 - **Headers**:
   - `Content-Type: application/json`
@@ -95,53 +95,6 @@ All requests must include a valid API key in the request headers:
   }
 }
 ```
-
-### Get a Pet Profile
-
-**Request**
-- **URL**: `https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/graphql`
-- **Method**: `POST`
-- **Headers**:
-  - `Content-Type: application/json`
-  - `x-api-key: <your-api-key>`
-
-**Request Example**:
-
-```
-{
-  "query": "query GetPetProfile($petId: ID!) { pet(petId: $petId) { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } }",
-  "variables": {
-    "petId": "123e4567-e89b-12d3-a456-426614174000"
-  }
-}
-```
-
-**Response Example**:
-```
-{
-  "data": {
-    "pet": {
-      "petId": "123e4567-e89b-12d3-a456-426614174000",
-      "organizationName": "Pet Rescue Org",
-      "applicantName": "John Doe",
-      "contactEmail": "johndoe@example.com",
-      "contactPhone": "1234567890",
-      "name": "Buddy",
-      "category": "Dog",
-      "age": 3,
-      "color": "Brown",
-      "gender": "Male",
-      "size": "Medium",
-      "location": "New York, NY",
-      "vaccination": "Yes",
-      "availability": "Yes",
-      "image": "http://example.com/buddy.jpg",
-      "description": "A friendly and playful dog."
-    }
-  }
-}
-```
-
 
 ## Data Model
 
