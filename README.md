@@ -20,7 +20,7 @@ This API is based on the Paws And Hearts project and provides a GraphQL interfac
 
 GraphQL Endpoint URL:
   ```sh
-  https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/graphql
+  https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod
   ```
 
 ## Authentication
