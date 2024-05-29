@@ -78,11 +78,11 @@ class CreatePetProfile(graphene.Mutation):
     def mutate(root, info, petProfileData):
         if not validate_input(petProfileData):
             raise Exception('Missing required fields')
-            pet_profile_data_dict = petProfileData.__dict__
-            pet_profile_data_dict['uploadDate'] = datetime.utcnow().isoformat()
+        pet_profile_data_dict = petProfileData.__dict__
+        pet_profile_data_dict['uploadDate'] = datetime.utcnow().isoformat()
         try:
-            table.put_item(Item=petProfileData)
-            return CreatePetProfile(pet=petProfileData)
+            table.put_item(Item=pet_profile_data_dict)
+            return CreatePetProfile(pet=pet_profile_data_dict)
         except Exception as e:
             print(f"Error saving pet: {str(e)}")
             raise Exception('Error saving pet')
@@ -103,24 +103,44 @@ def validate_input(input_data):
 # AWS Lambda handler
 def lambda_handler(event, context):
     print('Request event:', event)
-    body = json.loads(event.get('body', '{}')) if event.get('body') else {}
+    body = event.get('body', '{}')
+    if isinstance(body, dict):
+        print('Body is already a dictionary.')
+    else:
+        print('Body is a string, converting to dictionary.')
+        body = json.loads(body)
+    print('Parsed body:', body)
     query = body.get('query')
     variables = body.get('variables')
 
-    result = schema.execute(query, variable_values=variables)
-    response_body = {}
-    if result.errors:
-        response_body['errors'] = [str(error) for error in result.errors]
-    if result.data:
-        response_body['data'] = result.data
-
-    return {
-        'statusCode': 200 if not result.errors else 400,
-        'headers': {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PATCH,DELETE',
-            'Access-Control-Allow-Headers': 'Content-Type,X-Api-Key'
-        },
-        'body': json.dumps(response_body)
+    if query is None:
+        print('No query provided in the request body')
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Query not provided'})
     }
+
+    try:
+        result = schema.execute(query, variable_values=variables)
+        response_body = {}
+        if result.errors:
+            response_body['errors'] = [str(error) for error in result.errors]
+        if result.data:
+            response_body['data'] = result.data
+
+        return {
+            'statusCode': 200 if not result.errors else 400,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PATCH,DELETE',
+                'Access-Control-Allow-Headers': 'Content-Type,X-Api-Key'
+            },
+            'body': json.dumps(response_body)
+    }
+    except Exception as e:
+        print(f"Error executing query: {str(e)}")
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }

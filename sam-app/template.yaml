@@ -69,6 +69,14 @@ Resources:
             Path: /pet
             Method: post
             RestApiId: !Ref PetApi
+        SavePetApiOptions:
+          Type: Api
+          Properties:
+            Path: /pet
+            Method: options
+            RestApiId: !Ref PetApi
+            Auth:
+              ApiKeyRequired: false
 
   UsagePlan:
     Type: AWS::ApiGateway::UsagePlan

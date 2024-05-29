@@ -46,7 +46,7 @@ All requests must include a valid API key in the request headers:
 
 ```
 {
-  "query": "mutation CreatePetProfile($petProfileData: PetInput!) { createPet(petProfileData: $petProfileData) { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } }",
+  "query": "mutation CreatePet($petProfileData: PetInput!) { createPetProfile(petProfileData: $petProfileData) { pet { petId organizationName applicantName contactEmail contactPhone name category age gender color size location vaccination availability image description } } }",
   "variables": {
     "petProfileData": {
       "organizationName": "Pet Rescue Org",
