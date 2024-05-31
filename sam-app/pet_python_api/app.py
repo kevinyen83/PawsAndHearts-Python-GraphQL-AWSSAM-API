@@ -3,6 +3,15 @@ import boto3
 from datetime import datetime
 import graphene
 from graphene import ObjectType, String, Int, Boolean, Field, List, ID, InputObjectType
+from swagger_ui import api_doc
+from flask import Flask
+
+app = Flask(__name__)
+
+api_doc(app, config_path='./config/test.yaml', url_prefix='/api/doc', title='API doc')
+
+if __name__ == '__main__':
+    app.run()
 
 dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-2')
 table = dynamodb.Table('pet-and-paws-pet')

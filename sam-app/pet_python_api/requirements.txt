@@ -3,3 +3,5 @@ boto3
 graphene
 datetime
 aws-sam-cli
+Flask
+swagger-ui-py
