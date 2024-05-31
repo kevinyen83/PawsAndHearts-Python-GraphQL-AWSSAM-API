@@ -20,6 +20,12 @@
           ],
           "parameters": [
             {
+                "name": "x-api-key",
+                "in": "header",
+                "required": true,
+                "type": "string"
+              },
+            {
               "in": "body",
               "name": "petProfileData",
               "required": true,
