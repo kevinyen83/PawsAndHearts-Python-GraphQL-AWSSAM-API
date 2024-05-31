@@ -11,24 +11,18 @@ This API is based on the Paws And Hearts project and provides a GraphQL interfac
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-1. Back-end development: Python
-2. API: GraphQL
-3. AWS: SAM, Lambda, CloudFormation, API Gateway, DynamoDB
-4. CI/CD & DevOps: Docker
+1.  Back-end development: Python
+2.  API: GraphQL
+3.  AWS: SAM, Lambda, CloudFormation, API Gateway, DynamoDB
+4.  CI/CD & DevOps: Docker
 
 ## Endpoint
 
 GraphQL Endpoint URL:
-  ```sh
-  https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod
-  ```
 
-## Authentication
-
-All requests must include a valid API key in the request headers:
-  ```sh
-  x-api-key: <your-api-key>
-  ```
+```sh
+https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/pet
+```
 
 ## Usage
 
@@ -71,26 +65,29 @@ All requests must include a valid API key in the request headers:
 ```
 
 **Response Example**:
+
 ```
 {
   "data": {
-    "createPet": {
-      "petId": "123e4567-e89b-12d3-a456-426614174000",
-      "organizationName": "Pet Rescue Org",
-      "applicantName": "John Doe",
-      "contactEmail": "johndoe@example.com",
-      "contactPhone": "1234567890",
-      "name": "Buddy",
-      "category": "Dog",
-      "age": 3,
-      "color": "Brown",
-      "gender": "Male",
-      "size": "Medium",
-      "location": "New York, NY",
-      "vaccination": "Yes",
-      "availability": "Yes",
-      "image": "http://example.com/buddy.jpg",
-      "description": "A friendly and playful dog."
+    "createPetProfile": {
+      "pet": {
+        "petId": "123e4567-e89b-12d3-a456-426614174000",
+        "organizationName": "Pet Rescue Org",
+        "applicantName": "John Doe",
+        "contactEmail": "johndoe@example.com",
+        "contactPhone": "1234567890",
+        "name": "Buddy",
+        "category": "Dog",
+        "age": 3,
+        "color": "Brown",
+        "gender": "Male",
+        "size": "Medium",
+        "location": "New York, NY",
+        "vaccination": "Yes",
+        "availability": "Yes",
+        "image": "http://example.com/buddy.jpg",
+        "description": "A friendly and playful dog."
+      }
     }
   }
 }
@@ -99,6 +96,7 @@ All requests must include a valid API key in the request headers:
 ## Data Model
 
 ### PetInput
+
 ```
 input PetInput {
   organizationName: String!
@@ -121,6 +119,7 @@ input PetInput {
 ```
 
 ### Pet
+
 ```
 type Pet {
   petId: ID!
@@ -145,6 +144,7 @@ type Pet {
 ## Error Handling
 
 If the request fails, the response will contain error information. For example:
+
 ```
 {
   "errors": [
@@ -165,11 +165,9 @@ If the request fails, the response will contain error information. For example:
 }
 ```
 
-
 ## License
 
 MIT License
-
 
 ## Contact
 
