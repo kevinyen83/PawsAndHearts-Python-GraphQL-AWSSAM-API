@@ -1,0 +1,16 @@
+{
+    "body": "{\"query\": \"mutation CreatePet($petProfileData: PetInput!) { create_pet_profile(petProfileData: $petProfileData) { pet { petId name } } }\",\"variables\": { \"petProfileData\": { \"petId\": \"1\", \"organizationName\": \"Animal Shelter\", \"applicantName\": \"John Doe\", \"contactEmail\": \"john.doe@example.com\", \"contactPhone\": \"1234567890\", \"name\": \"Fluffy\", \"category\": \"Cat\", \"age\": 2, \"gender\": \"Female\", \"color\": \"White\", \"size\": \"Small\", \"location\": \"New York\", \"vaccination\": \"Yes\", \"availability\": \"Available\", \"image\": \"http://example.com/fluffy.jpg\", \"description\": \"A lovely white cat.\" } } }",
+    "resource": "/pet",
+    "path": "/pet",
+    "httpMethod": "POST",
+    "isBase64Encoded": false,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "requestContext": {
+      "resourcePath": "/pet",
+      "httpMethod": "POST",
+      "path": "/prod/pet"
+    }
+  }
+  
