@@ -1,5 +1,7 @@
 # Paws And Hearts-Pet Profile GraphQL API
 
+![Alt text](https://github.com/kevinyen83/PawsAndHearts-AWSSAM-GraphQL-API/screenshots/AWS.drawio.png)
+
 ## Introduction
 
 This API is based on the Paws And Hearts project and provides a GraphQL interface for managing pet profiles. Users can create and read pet profiles through this interface. Please feel free to review the parent project: https://github.com/kevinyen83/PawsAndHearts
