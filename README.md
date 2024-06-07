@@ -15,7 +15,7 @@ This API is based on the Paws And Hearts project and provides a GraphQL interfac
 
 1.  Back-end development: Python
 2.  API: GraphQL
-3.  AWS: SAM, Lambda, CloudFormation, API Gateway, DynamoDB
+3.  AWS: SAM, Lambda, CloudFormation, API Gateway, DynamoDB, S3
 4.  CI/CD & DevOps: Docker
 
 ## Endpoint
