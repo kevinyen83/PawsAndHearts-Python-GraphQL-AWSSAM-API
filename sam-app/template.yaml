@@ -30,8 +30,14 @@ Resources:
       Architectures:
         - x86_64
       Policies:
+      - S3CrudPolicy:
+          BucketName: "pet-profile-image"
       - DynamoDBCrudPolicy:
           TableName: "pet-and-paws-pet"
+      Environment:
+        Variables:
+          S3_BUCKET: pet-profile-image
+          DYNAMODB_TABLE: pet-and-paws-pet
       Events:
         HealthApi:
           Type: Api
