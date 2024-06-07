@@ -1,8 +1,10 @@
 requests
 boto3
 graphene
+graphql-core<3,>=2.3
+graphql-server-core>=1.2.0
 datetime
-aws-sam-cli
 Flask
+flask-graphql>=2.0.1
 swagger-ui-py
 pybase64
