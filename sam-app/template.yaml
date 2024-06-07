@@ -10,6 +10,12 @@ Globals:
     Timeout: 10
     MemorySize: 128
 
+Parameters:
+  S3BucketName:
+    Type: String
+    Default: pet-profile-image
+    Description: "The name of the S3 bucket to store pet profile images"
+
 Resources:
   PetApi:
     Type: AWS::Serverless::Api
@@ -31,12 +37,12 @@ Resources:
         - x86_64
       Policies:
       - S3CrudPolicy:
-          BucketName: "pet-profile-image"
+          BucketName: !Ref S3BucketName
       - DynamoDBCrudPolicy:
           TableName: "pet-and-paws-pet"
       Environment:
         Variables:
-          S3_BUCKET: pet-profile-image
+          S3_BUCKET: !Ref S3BucketName
           DYNAMODB_TABLE: pet-and-paws-pet
       Events:
         HealthApi:
@@ -83,6 +89,34 @@ Resources:
             RestApiId: !Ref PetApi
             Auth:
               ApiKeyRequired: false
+
+  PetProfileImageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: ["*"]
+            AllowedMethods: ["GET"]
+            AllowedOrigins: ["*"]
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        IgnorePublicAcls: false
+        BlockPublicPolicy: false
+        RestrictPublicBuckets: false
+
+  PetProfileImageBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3BucketName
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${S3BucketName}/*"
 
   UsagePlan:
     Type: AWS::ApiGateway::UsagePlan

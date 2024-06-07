@@ -34,3 +34,13 @@ warm_containers = "EAGER"
 
 [default.local_start_lambda.parameters]
 warm_containers = "EAGER"
+
+[v.deploy.parameters]
+stack_name = "python-graphql-aws"
+resolve_s3 = true
+s3_prefix = "python-graphql-aws"
+region = "ap-southeast-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
