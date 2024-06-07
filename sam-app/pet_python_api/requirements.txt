@@ -7,4 +7,3 @@ datetime
 Flask
 flask-graphql>=2.0.1
 swagger-ui-py
-pybase64

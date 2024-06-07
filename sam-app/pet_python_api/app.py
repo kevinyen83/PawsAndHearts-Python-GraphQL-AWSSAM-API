@@ -1,7 +1,7 @@
 import os
 import json
 import boto3
-import pybase64
+import base64
 import uuid
 from datetime import datetime
 import graphene
@@ -99,14 +99,14 @@ class CreatePetProfile(graphene.Mutation):
 
         print("Pet profile data:", pet_profile_data_dict)
 
-        image_data = pybase64.b64decode(pet_profile_data_dict.pop('image'))
+        image_data = base64.b64decode(pet_profile_data_dict.pop('image').split(',')[1])
         image_id = str(uuid.uuid4())
         s3_key = f"{image_id}.jpg"
 
 
         try:
             print(f"Uploading image to S3: Bucket={S3_BUCKET}, Key={s3_key}")
-            s3_client.put_object(Bucket=S3_BUCKET, Key=s3_key, Body=image_data)
+            s3_client.put_object(Bucket=S3_BUCKET, Key=s3_key, Body=image_data, ContentType='image/jpeg')
             image_url = f"https://{S3_BUCKET}.s3.amazonaws.com/{s3_key}"
             pet_profile_data_dict['image'] = image_url
             print(f"Saving pet profile to DynamoDB: Table={DYNAMODB_TABLE_NAME}")
