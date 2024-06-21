@@ -11,6 +11,12 @@ Globals:
     MemorySize: 128
 
 Parameters:
+  Region:
+    Type: String
+    Default: ap-southeast-2
+  AWSEnv:
+    Type: String
+    Default: AWS
   S3BucketName:
     Type: String
     Default: pet-profile-image
@@ -24,9 +30,10 @@ Resources:
       Auth:
         ApiKeyRequired: true
       Cors:
-        AllowMethods: "'OPTIONS,GET,POST,PATCH,DELETE'"
-        AllowHeaders: "'Content-Type,X-Api-Key'"
+        AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
         AllowOrigin: "'*'"
+
   PetApiFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -36,32 +43,22 @@ Resources:
       Architectures:
         - x86_64
       Policies:
-      - S3CrudPolicy:
-          BucketName: !Ref S3BucketName
-      - DynamoDBCrudPolicy:
-          TableName: "pet-and-paws-pet"
+        - S3CrudPolicy:
+            BucketName: !Ref S3BucketName
+        - DynamoDBCrudPolicy:
+            TableName: "pet-and-paws-pet"
       Environment:
         Variables:
+          REGION: !Ref Region
+          AWSENV: !Ref AWSEnv
           S3_BUCKET: !Ref S3BucketName
           DYNAMODB_TABLE: pet-and-paws-pet
       Events:
-        HealthApi:
-          Type: Api
-          Properties:
-            Path: /health
-            Method: get
-            RestApiId: !Ref PetApi
-        GetPetApi:
-          Type: Api
-          Properties:
-            Path: /pet
-            Method: get
-            RestApiId: !Ref PetApi
         GetPetsApi:
           Type: Api
           Properties:
             Path: /pets
-            Method: get
+            Method: post
             RestApiId: !Ref PetApi
         UpdateAvailabilityApi:
           Type: Api
@@ -89,6 +86,7 @@ Resources:
             RestApiId: !Ref PetApi
             Auth:
               ApiKeyRequired: false
+
 
   PetProfileImageBucket:
     Type: AWS::S3::Bucket

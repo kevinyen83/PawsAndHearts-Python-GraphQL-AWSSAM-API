@@ -78,6 +78,7 @@ class Query(ObjectType):
         try:
             response = table.scan()
             if 'Items' in response:
+                print("Fetched pets data:", response['Items'])
                 return response['Items']
             else:
                 return []
@@ -99,7 +100,7 @@ class CreatePetProfile(graphene.Mutation):
 
         print("Pet profile data:", pet_profile_data_dict)
 
-        image_data = base64.b64decode(pet_profile_data_dict.pop('image').split(',')[1])
+        image_data = base64.b64decode(pet_profile_data_dict['image'].split(',')[1])
         image_id = str(uuid.uuid4())
         s3_key = f"{image_id}.jpg"
 
@@ -131,22 +132,46 @@ def validate_input(input_data):
 
 def lambda_handler(event, context):
     print('Request event:', event)
+
+    cors_headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers',
+        'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
+    }
+
+
+
     body = event.get('body', '{}')
-    if isinstance(body, dict):
-        print('Body is already a dictionary.')
-    else:
+    print('Raw body:', body)
+    
+    if isinstance(body, str):
         print('Body is a string, converting to dictionary.')
-        body = json.loads(body)
+        try:
+            body = json.loads(body)
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {str(e)}")
+            return {
+                'statusCode': 400,
+                'headers': cors_headers,
+                'body': json.dumps({'error': 'Invalid JSON format'}),
+            }
+
     print('Parsed body:', body)
+
+
     query = body.get('query')
-    variables = body.get('variables')
+    variables = body.get('variables', {})
+
+    print('Query:', query)
+    print('Variables:', variables)
 
     if query is None:
         print('No query provided in the request body')
         return {
             'statusCode': 400,
-            'body': json.dumps({'error': 'Query not provided'})
-    }
+            'headers': cors_headers,
+            'body': json.dumps({'error': 'Query not provided'}),
+        }
 
     try:
         result = schema.execute(query, variable_values=variables)
@@ -156,19 +181,18 @@ def lambda_handler(event, context):
         if result.data:
             response_body['data'] = result.data
 
-        return {
+        response = {
             'statusCode': 200 if not result.errors else 400,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PATCH,DELETE',
-                'Access-Control-Allow-Headers': 'Content-Type,X-Api-Key'
-            },
-            'body': json.dumps(response_body)
-    }
+            'headers': cors_headers,
+            'body': json.dumps(response_body),
+        }
+
+        return response
+
     except Exception as e:
         print(f"Error executing query: {str(e)}")
         return {
             'statusCode': 500,
-            'body': json.dumps({'error': str(e)})
+            'headers': cors_headers,
+            'body': json.dumps({'error': 'Query not provided'}),
         }
