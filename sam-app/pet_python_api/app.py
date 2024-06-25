@@ -17,7 +17,7 @@ if __name__ == '__main__':
     app.run()
 
 S3_BUCKET = os.environ.get('S3_BUCKET', 'pet-profile-image')
-DYNAMODB_TABLE_NAME = os.environ.get('DYNAMODB_TABLE', 'pet-and-paws-pet')
+DYNAMODB_TABLE_NAME = os.environ.get('DYNAMODB_TABLE', 'pet-profile-table')
 
 dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-2')
 table = dynamodb.Table(DYNAMODB_TABLE_NAME)
@@ -58,6 +58,9 @@ class PetType(ObjectType):
     availability = String()
     image = String()
     description = String()
+
+class UpdateAvailabilityInput(InputObjectType):
+    petId = ID(required=True)
 
 class Query(ObjectType):
     pet = Field(PetType, petId=ID(required=True))
@@ -117,8 +120,31 @@ class CreatePetProfile(graphene.Mutation):
             print(f"Error saving pet: {str(e)}")
             raise Exception('Error saving pet')
 
+class UpdateAvailability(graphene.Mutation):
+    class Arguments:
+        input = UpdateAvailabilityInput(required=True)
+
+    pet = Field(PetType)
+
+    def mutate(root, info, input):
+        pet_id = input.petId
+
+        try:
+            response = table.update_item(
+                Key={'petId': pet_id},
+                UpdateExpression="set availability = :a",
+                ExpressionAttributeValues={':a': 'No'},
+                ReturnValues="ALL_NEW"
+            )
+            updated_pet = response.get('Attributes')
+            return UpdateAvailability(pet=updated_pet)
+        except Exception as e:
+            print(f"Error updating availability: {str(e)}")
+            raise Exception('Error updating availability')
+
 class Mutation(ObjectType):
     create_pet_profile = CreatePetProfile.Field()
+    update_availability = UpdateAvailability.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
 
@@ -138,8 +164,6 @@ def lambda_handler(event, context):
         'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers',
         'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
     }
-
-
 
     body = event.get('body', '{}')
     print('Raw body:', body)

@@ -21,6 +21,10 @@ Parameters:
     Type: String
     Default: pet-profile-image
     Description: "The name of the S3 bucket to store pet profile images"
+  DynamoDBTableName:
+    Type: String
+    Default: pet-profile-table
+    Description: "The name of the DynamoDB table to store pet profile info"
 
 Resources:
   PetApi:
@@ -40,19 +44,17 @@ Resources:
       CodeUri: pet_python_api/
       Handler: app.lambda_handler
       Runtime: python3.9
-      Architectures:
-        - x86_64
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref S3BucketName
         - DynamoDBCrudPolicy:
-            TableName: "pet-and-paws-pet"
+            TableName: !Ref DynamoDBTableName
       Environment:
         Variables:
           REGION: !Ref Region
           AWSENV: !Ref AWSEnv
           S3_BUCKET: !Ref S3BucketName
-          DYNAMODB_TABLE: pet-and-paws-pet
+          DYNAMODB_TABLE: !Ref DynamoDBTableName
       Events:
         GetPetsApi:
           Type: Api
@@ -63,14 +65,8 @@ Resources:
         UpdateAvailabilityApi:
           Type: Api
           Properties:
-            Path: /updateAvailability
-            Method: patch
-            RestApiId: !Ref PetApi
-        DeletePetApi:
-          Type: Api
-          Properties:
             Path: /pet
-            Method: delete
+            Method: patch
             RestApiId: !Ref PetApi
         SavePetApi:
           Type: Api
@@ -78,15 +74,6 @@ Resources:
             Path: /pet
             Method: post
             RestApiId: !Ref PetApi
-        SavePetApiOptions:
-          Type: Api
-          Properties:
-            Path: /pet
-            Method: options
-            RestApiId: !Ref PetApi
-            Auth:
-              ApiKeyRequired: false
-
 
   PetProfileImageBucket:
     Type: AWS::S3::Bucket
@@ -115,6 +102,20 @@ Resources:
             Principal: "*"
             Action: "s3:GetObject"
             Resource: !Sub "arn:aws:s3:::${S3BucketName}/*"
+
+  PetProfileTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref DynamoDBTableName
+      AttributeDefinitions:
+        - AttributeName: petId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: petId
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
 
   UsagePlan:
     Type: AWS::ApiGateway::UsagePlan
@@ -152,6 +153,10 @@ Outputs:
   PetApiFunctionIamRole:
     Description: "Implicit IAM Role created for Pet API function"
     Value: !GetAtt PetApiFunctionRole.Arn
+  PetProfileTable:
+    Description: "DynamoDB Table Name"
+    Value: !Ref DynamoDBTableName
   PetApiKey:
     Description: "API Key for Pet API"
     Value: !Ref ApiKey
+    
