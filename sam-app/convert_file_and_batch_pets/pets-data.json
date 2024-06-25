@@ -25,7 +25,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/33.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/33.jpeg"
           },
           "location": {
             "S": "Pondside"
@@ -67,7 +67,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/22.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/22.jpeg"
           },
           "location": {
             "S": "Bark Avenue Rescue"
@@ -109,7 +109,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/18.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/18.jpeg"
           },
           "location": {
             "S": "Purrfect Paws Shelter"
@@ -151,7 +151,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/16.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/16.jpeg"
           },
           "location": {
             "S": "Whisker Haven"
@@ -193,7 +193,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/2.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/2.jpeg"
           },
           "location": {
             "S": "Parkside"
@@ -235,7 +235,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/13.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/13.jpeg"
           },
           "location": {
             "S": "Purrfect Paws Shelter"
@@ -277,7 +277,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/8.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/8.jpeg"
           },
           "location": {
             "S": "Purrfect Paws Shelter"
@@ -319,7 +319,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/9.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/9.jpeg"
           },
           "location": {
             "S": "Canine Companions Rescue"
@@ -361,7 +361,7 @@
             "S": "male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/31.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/31.jpeg"
           },
           "location": {
             "S": "Shelter Haven"
@@ -403,7 +403,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/6.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/6.jpeg"
           },
           "location": {
             "S": "Feathered Friends Sanctuary"
@@ -445,7 +445,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/28.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/28.jpeg"
           },
           "location": {
             "S": "Purrfect Paws Shelter"
@@ -487,7 +487,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/30.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/30.jpeg"
           },
           "location": {
             "S": "Feathered Friends Sanctuary"
@@ -529,7 +529,7 @@
             "S": "female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/35.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/35.jpeg"
           },
           "location": {
             "S": "\"UTS, Sydney\""
@@ -571,7 +571,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/24.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/24.jpeg"
           },
           "location": {
             "S": "Happy Tails Adoption Center"
@@ -613,7 +613,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/27.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/27.jpeg"
           },
           "location": {
             "S": "Sunshine Kennels"
@@ -655,7 +655,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/0.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/0.jpeg"
           },
           "location": {
             "S": "Glebe"
@@ -697,7 +697,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/5.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/5.jpeg"
           },
           "location": {
             "S": "Feline Friends Shelter"
@@ -739,7 +739,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/4.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/4.jpeg"
           },
           "location": {
             "S": "Hillsboro"
@@ -781,7 +781,7 @@
             "S": "female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/32.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/32.jpeg"
           },
           "location": {
             "S": "Sunshine Sanctuary"
@@ -823,7 +823,7 @@
             "S": "male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/34.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/34.jpeg"
           },
           "location": {
             "S": "Whisker's Haven"
@@ -865,7 +865,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/23.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/23.jpeg"
           },
           "location": {
             "S": "Purrfect Paws Shelter"
@@ -907,7 +907,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/19.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/19.jpeg"
           },
           "location": {
             "S": "Canine Companions Rescue"
@@ -949,7 +949,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/26.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/26.jpeg"
           },
           "location": {
             "S": "Whisker Haven"
@@ -991,7 +991,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/7.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/7.jpeg"
           },
           "location": {
             "S": "Sunshine Kennels"
@@ -1033,7 +1033,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/11.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/11.jpeg"
           },
           "location": {
             "S": "Whisker Haven"
@@ -1075,7 +1075,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/3.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/3.jpeg"
           },
           "location": {
             "S": "Aviary Haven"
@@ -1117,7 +1117,7 @@
             "S": "Female"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/20.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/20.jpeg"
           },
           "location": {
             "S": "Feathered Friends Sanctuary"
@@ -1159,7 +1159,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/29.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/29.jpeg"
           },
           "location": {
             "S": "Canine Companions Rescue"
@@ -1201,7 +1201,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/21.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/21.jpeg"
           },
           "location": {
             "S": "Whisker Haven"
@@ -1243,7 +1243,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/25.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/25.jpeg"
           },
           "location": {
             "S": "Aviary Haven"
@@ -1285,7 +1285,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/12.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/12.jpeg"
           },
           "location": {
             "S": "Bark Avenue Rescue"
@@ -1327,7 +1327,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/17.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/17.jpeg"
           },
           "location": {
             "S": "Sunshine Kennels"
@@ -1369,7 +1369,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/10.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/10.jpeg"
           },
           "location": {
             "S": "Feathered Friends Sanctuary"
@@ -1411,7 +1411,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/15.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/15.jpeg"
           },
           "location": {
             "S": "Aviary Haven"
@@ -1453,7 +1453,7 @@
             "S": "Male"
           },
           "image": {
-            "S": "https://pet-profile-image-bucket.s3.ap-southeast-2.amazonaws.com/14.jpeg"
+            "S": "https://pet-profile-image.s3.ap-southeast-2.amazonaws.com/14.jpeg"
           },
           "location": {
             "S": "Happy Tails Adoption Center"
