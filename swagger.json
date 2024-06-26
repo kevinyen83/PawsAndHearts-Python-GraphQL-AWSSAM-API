@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-      "description": "This API is based on the Paws And Hearts project and provides a GraphQL interface for managing pet profiles.\nUsers can create and read pet profiles through this interface.\nPlease feel free to review the parent project: [Paws And Hearts](https://github.com/kevinyen83/PawsAndHearts)",
+      "description": "This API is based on the Paws And Hearts project and provides a GraphQL interface for managing pet profiles.\nUsers can create, get pet profile's data and update pet availability values in the table through this interface.\nPlease feel free to review the parent project: [Paws And Hearts](https://github.com/kevinyen83/PawsAndHearts)",
       "version": "1.0.0",
-      "title": "Paws And Hearts-Pet Profile GraphQL API"
+      "title": "Paws And Hearts: Pet Profile GraphQL API"
     },
     "host": "your-api-id.execute-api.your-region.amazonaws.com",
     "basePath": "/Prod",
@@ -11,6 +11,61 @@
       "https"
     ],
     "paths": {
+      "/pets": {
+        "post": {
+          "summary": "Get all Pet Profiles",
+          "operationId": "getPets",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "example": "query GetPets { pets { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } }"
+                  },
+                  "variables": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/Pet"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/pet": {
         "post": {
           "summary": "Create a Pet Profile",
@@ -20,17 +75,46 @@
           ],
           "parameters": [
             {
-                "name": "x-api-key",
-                "in": "header",
-                "required": true,
-                "type": "string"
-              },
+              "name": "x-api-key",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            },
             {
               "in": "body",
-              "name": "petProfileData",
+              "name": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/PetInput"
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "example": "mutation CreatePet($petProfileData: PetInput!) { createPetProfile(petProfileData: $petProfileData) { pet { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } } }"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "example": {
+                      "petProfileData": {
+                        "organizationName": "string",
+                        "applicantName": "string",
+                        "contactEmail": "string",
+                        "contactPhone": "string",
+                        "petId": "string",
+                        "name": "string",
+                        "category": "string",
+                        "age": 1,
+                        "color": "string",
+                        "gender": "string",
+                        "size": "string",
+                        "location": "string",
+                        "vaccination": "string",
+                        "availability": "string",
+                        "image": "string",
+                        "description": "string"
+                      }
+                    }
+                  }
+                }
               }
             }
           ],
@@ -38,7 +122,62 @@
             "200": {
               "description": "Successful operation",
               "schema": {
-                "$ref": "#/definitions/Pet"
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "$ref": "#/definitions/Pet"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "patch": {
+          "summary": "Update Pet Availability",
+          "operationId": "updateAvailability",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "example": "mutation UpdateAvailability($input: UpdateAvailabilityInput!) { updateAvailability(input: $input) { pet { petId availability } } }"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "example": {
+                      "input": {
+                        "petId": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "$ref": "#/definitions/Pet"
+                  }
+                }
               }
             }
           }
@@ -166,6 +305,17 @@
             "type": "string"
           },
           "description": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateAvailabilityInput": {
+        "type": "object",
+        "required": [
+          "petId"
+        ],
+        "properties": {
+          "petId": {
             "type": "string"
           }
         }
