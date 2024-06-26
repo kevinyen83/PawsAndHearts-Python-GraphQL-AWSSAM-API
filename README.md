@@ -41,9 +41,9 @@ To enable CORS and set headers for your methods in AWS API Gateway, follow these
 
 4.  **Go back to the method and select "Integration Request".**
 
-    - Turn off **"Lambda proxy integration"** to allow manual setup of integration responses.
+    - Turn off `Lambda proxy integration` to allow manual setup of integration responses.
     - Expand **"HTTP Headers"** and add `Content-Type` and `x-api-key`.
-    - **Turn off "API key required" in each "OPTIONS" method.**
+    - **Turn off `API key required` in each "OPTIONS" method.**
 
 5.  **Go back to the method and select "Method Response".**
 
@@ -64,7 +64,7 @@ To enable CORS and set headers for your methods in AWS API Gateway, follow these
       - `Access-Control-Allow-Origin` to the response header. Input:
         `'*'`
 
-7.  **Deploy your API to the Prod stage.**
+7.  **Deploy your API to the `Prod` stage.**
 
 ## Usage
 
