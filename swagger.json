@@ -1,61 +1,69 @@
 {
-    "swagger": "2.0",
+    "openapi": "3.0.0",
     "info": {
       "description": "This API is based on the Paws And Hearts project and provides a GraphQL interface for managing pet profiles.\nUsers can create, get pet profile's data and update pet availability values in the table through this interface.\nPlease feel free to review the parent project: [Paws And Hearts](https://github.com/kevinyen83/PawsAndHearts)",
       "version": "1.0.0",
       "title": "Paws And Hearts: Pet Profile GraphQL API"
     },
-    "host": "your-api-id.execute-api.your-region.amazonaws.com",
-    "basePath": "/Prod",
-    "schemes": [
-      "https"
+    "servers": [
+      {
+        "url": "https://{your-api-id}.execute-api.{your-region}.amazonaws.com/Prod",
+        "variables": {
+          "your-api-id": {
+            "default": "your-api-id"
+          },
+          "your-region": {
+            "default": "your-region"
+          }
+        }
+      }
     ],
     "paths": {
       "/pets": {
         "post": {
           "summary": "Get all Pet Profiles",
           "operationId": "getPets",
-          "consumes": [
-            "application/json"
-          ],
           "parameters": [
             {
               "name": "x-api-key",
               "in": "header",
               "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
               "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {
-                    "type": "string",
-                    "example": "query GetPets { pets { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } }"
-                  },
-                  "variables": {
-                    "type": "object"
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string",
+                      "example": "query GetPets { pets { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } }"
+                    },
+                    "variables": {
+                      "type": "object"
+                    }
                   }
                 }
               }
             }
-          ],
+          },
           "responses": {
             "200": {
               "description": "Successful operation",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "body": {
+              "content": {
+                "application/json": {
+                  "schema": {
                     "type": "object",
                     "properties": {
                       "data": {
                         "type": "array",
                         "items": {
-                          "$ref": "#/definitions/Pet"
+                          "$ref": "#/components/schemas/Pet"
                         }
                       }
                     }
@@ -70,62 +78,62 @@
         "post": {
           "summary": "Create a Pet Profile",
           "operationId": "createPetProfile",
-          "consumes": [
-            "application/json"
-          ],
           "parameters": [
             {
               "name": "x-api-key",
               "in": "header",
               "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
               "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {
-                    "type": "string",
-                    "example": "mutation CreatePet($petProfileData: PetInput!) { createPetProfile(petProfileData: $petProfileData) { pet { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } } }"
-                  },
-                  "variables": {
-                    "type": "object",
-                    "example": {
-                      "petProfileData": {
-                        "organizationName": "string",
-                        "applicantName": "string",
-                        "contactEmail": "string",
-                        "contactPhone": "string",
-                        "petId": "string",
-                        "name": "string",
-                        "category": "string",
-                        "age": 1,
-                        "color": "string",
-                        "gender": "string",
-                        "size": "string",
-                        "location": "string",
-                        "vaccination": "string",
-                        "availability": "string",
-                        "image": "string",
-                        "description": "string"
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string",
+                      "example": "mutation CreatePet($petProfileData: PetInput!) { createPetProfile(petProfileData: $petProfileData) { pet { petId organizationName applicantName contactEmail contactPhone name category age color gender size location vaccination availability image description } } }"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "example": {
+                        "petProfileData": {
+                          "organizationName": "string",
+                          "applicantName": "string",
+                          "contactEmail": "string",
+                          "contactPhone": "string",
+                          "petId": "string",
+                          "name": "string",
+                          "category": "string",
+                          "age": 1,
+                          "color": "string",
+                          "gender": "string",
+                          "size": "string",
+                          "location": "string",
+                          "vaccination": "string",
+                          "availability": "string",
+                          "image": "string",
+                          "description": "string"
+                        }
                       }
                     }
                   }
                 }
               }
             }
-          ],
+          },
           "responses": {
             "200": {
               "description": "Successful operation",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "body": {
-                    "$ref": "#/definitions/Pet"
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pet"
                   }
                 }
               }
@@ -135,47 +143,47 @@
         "patch": {
           "summary": "Update Pet Availability",
           "operationId": "updateAvailability",
-          "consumes": [
-            "application/json"
-          ],
           "parameters": [
             {
               "name": "x-api-key",
               "in": "header",
               "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "required": true,
               "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {
-                    "type": "string",
-                    "example": "mutation UpdateAvailability($input: UpdateAvailabilityInput!) { updateAvailability(input: $input) { pet { petId availability } } }"
-                  },
-                  "variables": {
-                    "type": "object",
-                    "example": {
-                      "input": {
-                        "petId": "string"
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string",
+                      "example": "mutation UpdateAvailability($input: UpdateAvailabilityInput!) { updateAvailability(input: $input) { pet { petId availability } } }"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "example": {
+                        "input": {
+                          "petId": "string"
+                        }
                       }
                     }
                   }
                 }
               }
             }
-          ],
+          },
           "responses": {
             "200": {
               "description": "Successful operation",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "body": {
-                    "$ref": "#/definitions/Pet"
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pet"
                   }
                 }
               }
@@ -184,139 +192,141 @@
         }
       }
     },
-    "definitions": {
-      "PetInput": {
-        "type": "object",
-        "required": [
-          "age",
-          "applicantName",
-          "availability",
-          "category",
-          "color",
-          "contactEmail",
-          "contactPhone",
-          "description",
-          "gender",
-          "image",
-          "location",
-          "name",
-          "organizationName",
-          "petId",
-          "size",
-          "vaccination"
-        ],
-        "properties": {
-          "organizationName": {
-            "type": "string"
-          },
-          "applicantName": {
-            "type": "string"
-          },
-          "contactEmail": {
-            "type": "string"
-          },
-          "contactPhone": {
-            "type": "string"
-          },
-          "petId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "age": {
-            "type": "integer"
-          },
-          "color": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string"
-          },
-          "size": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          },
-          "vaccination": {
-            "type": "string"
-          },
-          "availability": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
+    "components": {
+      "schemas": {
+        "PetInput": {
+          "type": "object",
+          "required": [
+            "age",
+            "applicantName",
+            "availability",
+            "category",
+            "color",
+            "contactEmail",
+            "contactPhone",
+            "description",
+            "gender",
+            "image",
+            "location",
+            "name",
+            "organizationName",
+            "petId",
+            "size",
+            "vaccination"
+          ],
+          "properties": {
+            "organizationName": {
+              "type": "string"
+            },
+            "applicantName": {
+              "type": "string"
+            },
+            "contactEmail": {
+              "type": "string"
+            },
+            "contactPhone": {
+              "type": "string"
+            },
+            "petId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "age": {
+              "type": "integer"
+            },
+            "color": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "size": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "vaccination": {
+              "type": "string"
+            },
+            "availability": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
           }
-        }
-      },
-      "Pet": {
-        "type": "object",
-        "properties": {
-          "petId": {
-            "type": "string"
-          },
-          "organizationName": {
-            "type": "string"
-          },
-          "applicantName": {
-            "type": "string"
-          },
-          "contactEmail": {
-            "type": "string"
-          },
-          "contactPhone": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "age": {
-            "type": "integer"
-          },
-          "color": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string"
-          },
-          "size": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          },
-          "vaccination": {
-            "type": "string"
-          },
-          "availability": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
+        },
+        "Pet": {
+          "type": "object",
+          "properties": {
+            "petId": {
+              "type": "string"
+            },
+            "organizationName": {
+              "type": "string"
+            },
+            "applicantName": {
+              "type": "string"
+            },
+            "contactEmail": {
+              "type": "string"
+            },
+            "contactPhone": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "age": {
+              "type": "integer"
+            },
+            "color": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "size": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "vaccination": {
+              "type": "string"
+            },
+            "availability": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
           }
-        }
-      },
-      "UpdateAvailabilityInput": {
-        "type": "object",
-        "required": [
-          "petId"
-        ],
-        "properties": {
-          "petId": {
-            "type": "string"
+        },
+        "UpdateAvailabilityInput": {
+          "type": "object",
+          "required": [
+            "petId"
+          ],
+          "properties": {
+            "petId": {
+              "type": "string"
+            }
           }
         }
       }

@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This API is based on the Paws And Hearts project and provides a GraphQL interface for managing pet profiles. Users can create and read pet profiles through this interface. Please feel free to review the parent project: https://github.com/kevinyen83/PawsAndHearts
+This API is based on the Paws And Hearts project and provides a GraphQL interface for managing pet profiles. Users can create, get pet profile data and update pet availability values in the table through this interface. Please feel free to review the parent project: https://github.com/kevinyen83/PawsAndHearts
 
 ### Built With
 
@@ -30,7 +30,7 @@ https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/pet
 
 ### Swagger
 
-For more details and to try out the API, please visit: https://kevinyen83.github.io/PawsAndHearts-AWSSAM-GraphQL-API/
+For more details and to try out the API, please visit: https://kevinyen83.github.io/PawsAndHearts-Python-GraphQL-AWSSAM-API/
 
 ### Create a Pet Profile
 
