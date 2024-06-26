@@ -26,6 +26,46 @@ GraphQL Endpoint URL:
 https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/pet
 ```
 
+# AWS API Gateway Configuration
+
+To enable CORS and set headers for your methods in AWS API Gateway, follow these steps:
+
+1.  **Open the AWS Management Console and navigate to API Gateway.**
+
+2.  **Select your API and go to the "Resources" section.**
+
+3.  **For each method (POST /pet, POST /pets, PATCH /pet):**
+
+    - Click on the method and then select **"Method Request"**.
+    - Under **"Settings"**, add `Content-Type` and `x-api-key` to the **"HTTP Request Headers"** section.
+
+4.  **Go back to the method and select "Integration Request".**
+
+    - Turn off **"Lambda proxy integration"** to allow manual setup of integration responses.
+    - Expand **"HTTP Headers"** and add `Content-Type` and `x-api-key`.
+    - **Turn off "API key required" in each "OPTIONS" method.**
+
+5.  **Go back to the method and select "Method Response".**
+
+    - Add a `200` status code response.
+    - Under **"Response Headers for 200"**, add the following headers:
+      - `Access-Control-Allow-Headers`
+      - `Access-Control-Allow-Methods`
+      - `Access-Control-Allow-Origin`
+
+6.  **Go back to the method and select "Integration Response".**
+
+    - Add a `200` status code response.
+    - Map the following response headers:
+      - `Access-Control-Allow-Headers` to the response header. Input:
+        `'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'`
+      - `Access-Control-Allow-Methods` to the response header. Input:
+        `'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'`
+      - `Access-Control-Allow-Origin` to the response header. Input:
+        `'*'`
+
+7.  **Deploy your API to the Prod stage.**
+
 ## Usage
 
 ### Swagger
