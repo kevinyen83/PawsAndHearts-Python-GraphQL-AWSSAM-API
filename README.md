@@ -25,6 +25,9 @@ GraphQL Endpoint URL:
 ```sh
 https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/pet
 ```
+```sh
+https://<your-api-id>.execute-api.<your-region>.amazonaws.com/Prod/pets
+```
 
 # AWS API Gateway Configuration
 
